@@ -166,7 +166,7 @@ export default function Home() {
           
           <Stack flex={1} gap="sm">
             <Title order={2} fw={800} fz={35}>
-              My <span style={{color:"#5f3dc4"}}> portfolio</span>
+              NATAHINA <span style={{color:"#5f3dc4"}}> Rochaya</span>
             </Title>
 
             <Text c="dimmed">
