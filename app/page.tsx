@@ -156,6 +156,7 @@ export default function Home() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
+        
         <Flex
           align="center"
           justify="space-between"
@@ -163,8 +164,16 @@ export default function Home() {
           direction={{ base: "column", md: "row" }}
           id="about"
         >
+          <Box flex={1} ta="center" style={{ order: 0 }} >
+            <Image
+              src={image.src}
+              alt="Image"
+              fit="contain"
+              w={{ base: "90%", md: "100%" }}
+            />
+          </Box>
           
-          <Stack flex={1} gap="sm">
+          <Stack flex={1} gap="sm" style={{ order: { base: 1, md: 0 } }}>
             <Title order={2} fw={800} fz={35}>
               NATAHINA <span style={{color:"#5f3dc4"}}> Rochaya</span>
             </Title>
