@@ -214,14 +214,14 @@ Spécialisé dans le développement de logiciels web, la création de sites web 
             </Group>
           </Stack>
           
-          <Box flex={1} ta="center">
+          {/*<Box flex={1} ta="center">
             <Image
               src={image.src}
               alt="Hero image"
               fit="contain"
               w={{ base: "90%", md: "100%" }}
             />
-          </Box>
+          </Box>*/}
         </Flex>
       </motion.div>
 
