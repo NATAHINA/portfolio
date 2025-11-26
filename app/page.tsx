@@ -156,24 +156,15 @@ export default function Home() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        
         <Flex
           align="center"
           justify="space-between"
           gap="xl"
-          direction={{ base: "column", md: "row" }}
+          direction={{ base: "column", sm: "row-reverse" }}
           id="about"
         >
-          <Box flex={1} ta="center" style={{ order: 0 }} >
-            <Image
-              src={image.src}
-              alt="Image"
-              fit="contain"
-              w={{ base: "90%", md: "100%" }}
-            />
-          </Box>
           
-          <Stack flex={1} gap="sm" order={{ base: 1, md: 0 }}>
+          <Stack flex={1} gap="sm">
             <Title order={2} fw={800} fz={35}>
               NATAHINA <span style={{color:"#5f3dc4"}}> Rochaya</span>
             </Title>
@@ -214,14 +205,14 @@ Spécialisé dans le développement de logiciels web, la création de sites web 
             </Group>
           </Stack>
           
-          {/*<Box flex={1} ta="center">
+          <Box flex={1} ta="center">
             <Image
               src={image.src}
               alt="Hero image"
               fit="contain"
               w={{ base: "90%", md: "100%" }}
             />
-          </Box>*/}
+          </Box>
         </Flex>
       </motion.div>
 
