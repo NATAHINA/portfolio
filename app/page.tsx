@@ -160,7 +160,7 @@ export default function Home() {
           align="center"
           justify="space-between"
           gap="xl"
-          direction={{ base: "column", md: "row-reverse" }}
+          direction={{ base: "column", md: "row" }}
           id="about"
         >
           
