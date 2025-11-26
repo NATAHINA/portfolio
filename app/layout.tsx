@@ -17,9 +17,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="fr" suppressHydrationWarning>
       <head>
-        <meta name="description" content="Mon portfolio : projets en Next.js, React, UI/UX et développement web moderne.">
-        <meta name="keywords" content="Développeur web, Codeigniter 3, WordPress, Next.js, React, Madagascar, Portfolio">
-        <meta name="author" content="NATAHINA Rochaya">
         <ColorSchemeScript defaultColorScheme="auto"/>
       </head>
       <body>

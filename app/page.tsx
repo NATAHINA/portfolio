@@ -160,7 +160,7 @@ export default function Home() {
           align="center"
           justify="space-between"
           gap="xl"
-          direction={{ base: "column", md: "row" }}
+          direction={{ base: "column", md: "row-reverse" }}
           id="about"
         >
           
@@ -287,7 +287,7 @@ Spécialisé dans le développement de logiciels web, la création de sites web 
           >
           
           <Group justify="center" align="center" my={30}>
-            <Tabs variant="none" value={value} onChange={setValue} style={{ display: "flex", justifyContent: "center" }}>
+            <Tabs variant="none" value={value} onChange={setValue}>
               <Tabs.List ref={setRootRef} className={projets.list}>
                 <Tabs.Tab value="1" ref={setControlRef('1')} className={projets.tab}>
                   <Flex align="center">
