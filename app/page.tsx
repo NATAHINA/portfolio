@@ -173,7 +173,7 @@ export default function Home() {
             />
           </Box>
           
-          <Stack flex={1} gap="sm" style={{ order: { base: 1, md: 0 } }}>
+          <Stack flex={1} gap="sm" order={{ base: 1, md: 0 }}>
             <Title order={2} fw={800} fz={35}>
               NATAHINA <span style={{color:"#5f3dc4"}}> Rochaya</span>
             </Title>
