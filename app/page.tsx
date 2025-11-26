@@ -160,11 +160,19 @@ export default function Home() {
           align="center"
           justify="space-between"
           gap="xl"
-          direction={{ base: "row-reverse", md: "row" }}
+          direction={{ base: "column", md:"row" }}
           id="about"
         >
-          
-          <Stack flex={1} gap="sm">
+          <Box flex={1} ta="center">
+            <Image
+              src={image.src}
+              alt="Hero image"
+              fit="contain"
+              w={{ base: "90%", md: "90%", sm: "100%" }}
+            />
+          </Box>
+
+          <Stack flex={1} gap="sm" >
             <Title order={2} fw={800} fz={35}>
               NATAHINA <span style={{color:"#5f3dc4"}}> Rochaya</span>
             </Title>
@@ -204,15 +212,7 @@ Spécialisé dans le développement de logiciels web, la création de sites web 
               </Button>
             </Group>
           </Stack>
-          
-          <Box flex={1} ta="center">
-            <Image
-              src={image.src}
-              alt="Hero image"
-              fit="contain"
-              w={{ base: "90%", md: "100%" }}
-            />
-          </Box>
+                    
         </Flex>
       </motion.div>
 
