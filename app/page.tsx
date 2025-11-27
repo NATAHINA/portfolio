@@ -2,11 +2,11 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {Button, Container, Group, Image, List, Stack, Text, ThemeIcon, Title, Flex, Box, useMantineTheme} from "@mantine/core";
 import { motion } from "framer-motion";
 import image from "../images/image.svg";
-import { Cookie, Gauge, User, Check } from 'lucide-react';
+import { Cookie, Gauge, User, Check, CircleAlert } from 'lucide-react';
 import classes from '../css/FeaturesCards.module.css';
 import style from '../css/ArticlesCardsGrid.module.css';
 import projets from '../css/ProjetsCardsGrid.module.css';
@@ -16,6 +16,7 @@ import { Code, Database, Frame, Framer, FileBox, Workflow, Globe, Layers2 } from
 import { Anchor, Paper, TextInput, Textarea } from "@mantine/core";
 import { Mail, Phone, MapPin, MessageSquare, Send } from "lucide-react";
 import {Facebook, Github, Linkedin} from "lucide-react";
+import { Alert } from '@mantine/core';
 
 const footLinks = [
     { icon: Facebook, href: "https://www.facebook.com/profile.php?id=100009662919523" },
@@ -121,6 +122,58 @@ const skillsData = [
 export default function Home() {
   const theme = useMantineTheme();
 
+  type Feedback = {
+    type: "success" | "error";
+    title: string;
+    text: string;
+  };
+
+  const [feedback, setFeedback] = useState<Feedback | null>(null);
+
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
+    });
+
+
+    if (res.ok) {
+      setFeedback({
+        type: "success",
+        title: "Message envoyé",
+        text: "Votre message a bien été envoyé",
+      });
+    } else {
+      setFeedback({
+        type: "error",
+        title: "Erreur",
+        text: "Impossible d’envoyer le message",
+      });
+    }
+
+  };
+
+  useEffect(() => {
+    if (feedback) {
+      const timer = setTimeout(() => {
+        setFeedback(null);
+      }, 5000); // 5000 ms = 5 seconds
+
+      return () => clearTimeout(timer);
+    }
+  }, [feedback]);
+
+
   const sitecards = webdata.map((article) => (
     <Card key={article.title} radius="md" component="a" href={article.url} className={style.card} target="_blank">
       <AspectRatio ratio={1920 / 1080}>
@@ -204,12 +257,12 @@ Spécialisé dans le développement de logiciels web, la création de sites web 
 
             <Group mt="md">
               <Button radius="xl" size="md">
-                En savoir plus
+                Download CV
               </Button>
 
-              <Button radius="xl" variant="default" size="md">
+           {/*   <Button radius="xl" variant="default" size="md" component="a" href="#contact">
                 Contact
-              </Button>
+              </Button>*/}
             </Group>
           </Stack>
                     
@@ -418,63 +471,75 @@ Spécialisé dans le développement de logiciels web, la création de sites web 
                 </Stack>
               </Stack>
 
-              {/* ==================== COLONNE DROITE ==================== */}
-              <form onSubmit={(e) => e.preventDefault()}> 
+              
+              <form onSubmit={handleSubmit}>
                 <Stack gap="md" p={15}>
-                  <Text fz="lg" fw={700}>
-                    Envoyer un message
-                  </Text>
+                  <Text fz="lg" fw={700}>Envoyer un message</Text>
 
                   <SimpleGrid cols={{ base: 1, sm: 2 }}>
                     <TextInput
                       label="Votre nom"
-                      placeholder=""
-                      leftSection={
-                        <ThemeIcon variant="light" color="violet">
-                          <User size={16} />
-                        </ThemeIcon>
-                      }
+                      required
+                      value={form.name}
+                      onChange={(e) => setForm({ ...form, name: e.target.value })}
+                      leftSection={<ThemeIcon variant="light" color="violet">
+                        <User size={16} />
+                      </ThemeIcon>}
                     />
 
                     <TextInput
                       label="Votre email"
-                      placeholder=""
                       required
-                      leftSection={
-                        <ThemeIcon variant="light" color="violet">
-                          <Mail size={16} />
-                        </ThemeIcon>
-                      }
+                      value={form.email}
+                      onChange={(e) => setForm({ ...form, email: e.target.value })}
+                      leftSection={<ThemeIcon variant="light" color="violet">
+                        <Mail size={16} />
+                      </ThemeIcon>}
                     />
                   </SimpleGrid>
 
                   <TextInput
                     label="Sujet"
-                    placeholder=""
                     required
-                    leftSection={
-                      <ThemeIcon variant="light" color="violet">
-                        <MessageSquare size={16} />
-                      </ThemeIcon>
-                    }
+                    value={form.subject}
+                    onChange={(e) => setForm({ ...form, subject: e.target.value })}
+                    leftSection={<ThemeIcon variant="light" color="violet">
+                      <MessageSquare size={16} />
+                    </ThemeIcon>}
                   />
 
                   <Textarea
                     label="Votre message"
-                    placeholder=""
+                    required
                     minRows={4}
                     autosize
+                    value={form.message}
+                    onChange={(e) => setForm({ ...form, message: e.target.value })}
                   />
 
                   <Group justify="flex-end">
-                    <Button color="violet" rightSection={<Send size={16} />}>
+                    <Button type="submit" color="violet" rightSection={<Send size={16} />}>
                       Envoyer
                     </Button>
                   </Group>
+
                 </Stack>
               </form>
             </SimpleGrid>
           </Paper>
+
+          {feedback && (
+              <Alert
+                variant="filled"
+                color={feedback.type === "success" ? "teal" : "red"}
+                withCloseButton
+                title={feedback.title}
+                icon={feedback.type === "success" ? <Check /> : <CircleAlert />}
+                onClose={() => setFeedback(null)}
+              >
+                {feedback.text}
+              </Alert>
+            )}
 
           
         </Container>

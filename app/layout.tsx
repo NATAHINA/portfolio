@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import { theme } from "../theme";
 import Navbar from "@components/Navbar";
 import Footer from "@components/Footer";
+import { Notifications } from '@mantine/notifications';
 
 export const metadata: Metadata = {
   title: "NATAHINA Rochaya - Développeur Web",
@@ -22,6 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <MantineProvider theme={theme} defaultColorScheme="auto">
           <Navbar />
+          <Notifications />
           {children}
           <Footer />
         </MantineProvider>
