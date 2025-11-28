@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useState, useEffect } from 'react';
 import {Button, Container, Group, Image, List, Stack, Text, ThemeIcon, Title, Flex, Box, useMantineTheme} from "@mantine/core";
 import { motion } from "framer-motion";
-// import image from "../images/image.svg";
 import image from "../images/me.png";
 import { Cookie, Gauge, User, Check, CircleAlert } from 'lucide-react';
 import classes from '../css/FeaturesCards.module.css';
@@ -16,8 +15,9 @@ import '@mantine/core/styles.css';
 import { Code, Database, Frame, Framer, FileBox, Workflow, Globe, Layers2 } from 'lucide-react';
 import { Anchor, Paper, TextInput, Textarea } from "@mantine/core";
 import { Mail, Phone, MapPin, MessageSquare, Send } from "lucide-react";
-import {Facebook, Github, Linkedin} from "lucide-react";
-import { Alert } from '@mantine/core';
+import {Facebook, Github, Linkedin, Calendar } from "lucide-react";
+import { Alert, Modal  } from '@mantine/core';
+import {useMediaQuery} from '@mantine/hooks';
 
 const footLinks = [
     { icon: Facebook, href: "https://www.facebook.com/profile.php?id=100009662919523" },
@@ -51,27 +51,61 @@ const webdata = [
 
 const logdata = [
   {
-    title: 'NR BOUTIQUE - Logiciel de gestion de votre boutique',
+    title: "NR BOUTIQUE – Logiciel complet de gestion de boutique",
     image:
-      'https://nrboutique.pentadev-mada.com/assets/images/big/supermarket.jpg',
-    date: '18 Juillet 2025',
+      "https://nrboutique.pentadev-mada.com/assets/images/big/supermarket.jpg",
+    date: "18 Juillet 2025",
     url: "https://nrboutique.pentadev-mada.com/",
+    description: `NR BOUTIQUE est un logiciel conçu pour automatiser et simplifier toutes les opérations essentielles d’un commerce :`,
+    features: [
+      "Gestion complète des stocks en temps réel",
+      "Suivi des ventes, dépenses et mouvements de produits",
+      "Tableau de bord interactif pour visualiser les performances",
+      "Analyse des produits les plus vendus et des marges réalisées",
+      "Rapports détaillés pour orienter les décisions commerciales",
+      "Système sécurisé et accessible en ligne, utilisable depuis n’importe où",
+      "Interface intuitive adaptée aux responsables comme au personnel",
+    ],
   },
+
   {
-    title: 'N-RESTO - Logiciel de gestion pour votre restaurant.',
+    title: "N-RESTO – Système de gestion dédié aux restaurants",
     image:
-      'https://nresto.pentadev-mada.com/assets/images/big/card-3.png',
-    date: '15 Juin 2025',
+      "https://nresto.pentadev-mada.com/assets/images/big/card-3.png",
+    date: "15 Juin 2025",
     url: "https://nresto.pentadev-mada.com/",
+    description: `N-RESTO est un logiciel moderne pensé pour améliorer et fluidifier la gestion d’un restaurant :`,
+    features: [
+      "Gestion des commandes et suivi en temps réel des tables",
+      "Facturation rapide et simple",
+      "Contrôle automatisé des stocks d’ingrédients",
+      "Statistiques détaillées : chiffre d’affaires, plats les plus vendus, etc.",
+      "Interface fluide adaptée aux serveurs et gestionnaires",
+      "Réduction des erreurs grâce à un workflow optimisé",
+      "Amélioration de la qualité du service et de la productivité de l’équipe",
+    ],
   },
+
   {
-    title: 'NR-SCHOOL - Logiciel de gestion pour votre école',
+    title: "NR-SCHOOL – Plateforme avancée de gestion scolaire",
     image:
-      'https://pentadev-mada.com/wp-content/uploads/2023/06/cours.jpg',
-    date: '05 Octobre 2025',
+      "https://pentadev-mada.com/wp-content/uploads/2023/06/cours.jpg",
+    date: "05 Octobre 2025",
     url: "https://ecole.pentadev-mada.com/",
+    description: `NR-SCHOOL est une plateforme complète pour digitaliser la gestion administrative et pédagogique d’une école :`,
+    features: [
+      "Gestion des élèves, classes et niveaux",
+      "Suivi des notes, bulletins et absences",
+      "Paiement et gestion des frais de scolarité",
+      "Planning dynamique et emploi du temps",
+      "Partage de documents pour les enseignants et l’administration",
+      "Communication interne centralisée",
+      "Tableau de bord en temps réel : performances, effectifs, paiements, rapports",
+      "Accès simple et sécurisé, disponible partout",
+    ],
   },
 ];
+
 
 
 const skillsData = [
@@ -129,7 +163,18 @@ export default function Home() {
     text: string;
   };
 
+  type Article = {
+    title: string;
+    image: string;
+    date: string;
+    url: string;
+    description: string;
+    features: string[];
+  };
+
   const [feedback, setFeedback] = useState<Feedback | null>(null);
+  const [opened, setOpened] = useState(false);
+  const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
 
   const [form, setForm] = useState({
     name: "",
@@ -186,12 +231,19 @@ export default function Home() {
   ));
 
   const logcards = logdata.map((article) => (
-    <Card key={article.title} radius="md" component="a" href={article.url} className={style.card} target="_blank">
+    <Card key={article.title} radius="md" className={style.card}
+      onClick={() => {
+        setSelectedArticle(article);
+        setOpened(true);
+      }}
+      style={{ cursor: "pointer" }}>
+
       <AspectRatio ratio={1920 / 1080}>
         <Image src={article.image} radius="md" />
       </AspectRatio>
       <Text className={style.date}>{article.date}</Text>
       <Text className={style.title}>{article.title}</Text>
+
     </Card>
   ));
 
@@ -205,6 +257,51 @@ export default function Home() {
 
   return (
     <Container size="xl" py={20}>
+
+      <Modal
+        opened={opened}
+        onClose={() => setOpened(false)}
+        title={
+          <Text fw={800} size="lg">
+            {selectedArticle?.title}
+          </Text>
+        }
+        size="lg"
+        yOffset="10vh"
+        xOffset={0}
+        transitionProps={{ transition: 'fade', duration: 200 }}
+      >
+        {selectedArticle && (
+          <>
+            <Image src={selectedArticle.image} radius="xxs" mb="md"/>
+            <Text size="sm" c="dimmed"><Calendar size={16} /> {selectedArticle.date}</Text>
+            <Text mt="md" mb="md">{selectedArticle.description}</Text>
+            <List
+              spacing="xs"
+              size="sm"
+              mb="lg"
+              icon={
+                <ThemeIcon color="teal" size={16} radius="xl">
+                  <Check size={16} />
+                </ThemeIcon>
+              }
+            >
+             
+              {selectedArticle.features.map((feature, i) => (
+                <List.Item key={i}>{feature}</List.Item>
+              ))}
+            </List>
+
+            <a href={selectedArticle.url} target="_blank" rel="noopener noreferrer">
+              <Button mb="md" radius="xl" size="md">
+                Essayez
+              </Button>
+            </a>
+          </>
+        )}
+      </Modal>
+
+      {/**/}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -214,20 +311,13 @@ export default function Home() {
           align="center"
           justify="space-between"
           gap="xl"
-          direction={{ base: "column", md:"row" }}
+          direction={{ base: "column", sm:"row" }}
           id="about"
         >
-          <Box flex={1} ta="center">
-            <Image
-              src={image.src}
-              alt="Hero image"
-              fit="contain"
-              w={{ base: "90%", md: "90%", sm: "100%" }}
-            />
-          </Box>
+          
 
           <Stack flex={1} gap="sm" >
-            <Title order={2} fw={800} fz={35}>
+            <Title order={2} fw={800} fz={{base: 35}} >
               NATAHINA <span style={{color:"#5f3dc4"}}> Rochaya</span>
             </Title>
 
@@ -257,15 +347,23 @@ Spécialisé dans le développement de logiciels web, la création de sites web 
             </List>
 
             <Group mt="md">
-              <Button radius="xl" size="md">
-                Download CV
-              </Button>
-
-           {/*   <Button radius="xl" variant="default" size="md" component="a" href="#contact">
-                Contact
-              </Button>*/}
+              <a href="/cv.pdf" download>
+                <Button radius="xl" size="md">
+                  Download CV
+                </Button>
+              </a>
             </Group>
           </Stack>
+
+          <Box flex={1} >
+            <Image
+              src={image.src}
+              alt="ME"
+              fit="contain"
+              radius={9999}
+              w={{ base: "100%", md: "80%", sm: "100%", xs: "60%", xxs: "50%" }}
+            />
+          </Box>
                     
         </Flex>
       </motion.div>

@@ -81,9 +81,11 @@ export default function Navbar() {
           {/* RIGHT ZONE DESKTOP */}
           <Group visibleFrom="sm">
             <ThemeToggle />
-            <Button size="sm" variant="filled" radius="md">
-              Download CV
-            </Button>
+            <a href="/cv.pdf" download>
+              <Button size="sm" variant="filled" radius="md">
+                Download CV
+              </Button>
+            </a>
           </Group>
 
           {/* BURGER MOBILE */}
