@@ -16,6 +16,7 @@
     "@mantine/modals": "^8.3.8",
     "@mantine/notifications": "^8.3.8",
     "@mantine/styles": "^6.0.22",
+    "@vercel/analytics": "^1.6.1",
     "framer-motion": "^12.23.24",
     "lucide-react": "^0.554.0",
     "next": "16.0.3",

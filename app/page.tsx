@@ -14,7 +14,7 @@ import {Badge, Card, SimpleGrid, AspectRatio, Grid, Skeleton, FloatingIndicator,
 import '@mantine/core/styles.css';
 import { Code, Database, Frame, Framer, FileBox, Workflow, Globe, Layers2 } from 'lucide-react';
 import { Anchor, Paper, TextInput, Textarea } from "@mantine/core";
-import { Mail, Phone, MapPin, MessageSquare, Send } from "lucide-react";
+import { Mail, Phone, MapPin, MessageSquare, Send, GitBranch, Palette } from "lucide-react";
 import {Facebook, Github, Linkedin, Calendar } from "lucide-react";
 import { Alert, Modal  } from '@mantine/core';
 import {useMediaQuery} from '@mantine/hooks';
@@ -32,6 +32,7 @@ const webdata = [
       'https://cqpm.fr/wp-content/uploads/2025/11/basket-secu.jpg',
     date: '18 Août 2024',
     url: "https://cqpm.fr/",
+    technologies: ["WordPress", "PHP", "Elementor", "SEO", "CSS3"],
   },
   {
     title: 'NR CODE - Créateur des solutions web & design sur mesure',
@@ -39,6 +40,7 @@ const webdata = [
       'https://nrcode.pentadev-mada.com/wp-content/uploads/2025/07/Site-desktop-768x768.png',
     date: '15 Septembre 2025',
     url: "https://nrcode.pentadev-mada.com/",
+    technologies: ["WordPress", "PHP", "SEO", "CSS3"],
   },
   {
     title: 'PENTADEV MADA - Votre partenaire de développement informatique',
@@ -46,16 +48,37 @@ const webdata = [
       'https://pentadev-mada.com/wp-content/uploads/2023/05/apple-ge2d9f4abc_1280.jpg',
     date: '20 Novembre 2024',
     url: "https://pentadev-mada.com/",
+    technologies: ["WordPress", "PHP", "Divi", "SEO", "CSS3"],
   },
 ];
 
 const logdata = [
+  {
+    title: "AMIKY – Plateforme de messagerie moderne",
+    image:
+      "/amiky_chat.png",
+    date: "05 Janvier 2026",
+    url: "https://amiky.vercel.app/",
+    technologies: ["Next.js", "React", "Mantine UI", "Framer Motion"],
+    description: `AMIKY est une plateforme de messagerie moderne qui rapproche les gens, en toute sécurité: `,
+    features: [
+      "Gestion complète des stocks en temps réel",
+      "Suivi des ventes, dépenses et mouvements de produits",
+      "Tableau de bord interactif pour visualiser les performances",
+      "Analyse des produits les plus vendus et des marges réalisées",
+      "Rapports détaillés pour orienter les décisions commerciales",
+      "Système sécurisé et accessible en ligne, utilisable depuis n’importe où",
+      "Interface intuitive adaptée aux responsables comme au personnel",
+    ],
+
+  },
   {
     title: "NR BOUTIQUE – Logiciel complet de gestion de boutique",
     image:
       "https://nrboutique.pentadev-mada.com/assets/images/big/supermarket.jpg",
     date: "18 Juillet 2025",
     url: "https://nrboutique.pentadev-mada.com/",
+    technologies: ["CodeIgniter 3", "MySQL", "JavaScript", "Bootstrap5"],
     description: `NR BOUTIQUE est un logiciel conçu pour automatiser et simplifier toutes les opérations essentielles d’un commerce :`,
     features: [
       "Gestion complète des stocks en temps réel",
@@ -74,6 +97,7 @@ const logdata = [
       "https://nresto.pentadev-mada.com/assets/images/big/card-3.png",
     date: "15 Juin 2025",
     url: "https://nresto.pentadev-mada.com/",
+    technologies: ["CodeIgniter 3", "MySQL", "JavaScript", "Bootstrap5"],
     description: `N-RESTO est un logiciel moderne pensé pour améliorer et fluidifier la gestion d’un restaurant :`,
     features: [
       "Gestion des commandes et suivi en temps réel des tables",
@@ -92,6 +116,7 @@ const logdata = [
       "https://pentadev-mada.com/wp-content/uploads/2023/06/cours.jpg",
     date: "05 Octobre 2025",
     url: "https://ecole.pentadev-mada.com/",
+    technologies: ["CodeIgniter 3", "MySQL", "JavaScript", "Bootstrap4"],
     description: `NR-SCHOOL est une plateforme complète pour digitaliser la gestion administrative et pédagogique d’une école :`,
     features: [
       "Gestion des élèves, classes et niveaux",
@@ -110,45 +135,51 @@ const logdata = [
 
 const skillsData = [
   {
-    category: "Langages",
+    category: "Langages & Typage",
     icon: <Code size={24} />,
-    skills: ["PHP 7", "JavaScript", "HTML5", "CSS3"],
+    skills: ["PHP 7+", "JavaScript", "HTML5", "CSS3", "SQL"],
     color: "blue",
   },
   {
-    category: "Frameworks",
+    category: "Frameworks & Librairies",
     icon: <Framer size={24} />,
-    skills: ["CodeIgniter 3", "jQuery", "Bootstrap"],
+    skills: ["Next.js", "React", "CodeIgniter 3", "Bootstrap"],
     color: "teal",
   },
   {
-    category: "Conception",
-    icon: <Workflow size={24} />,
-    skills: ["Méthodes Merise", "UML"],
-    color: "orange",
-  },
-  {
-    category: "Base de données",
+    category: "Bases de données",
     icon: <Database size={24} />,
-    skills: ["MySQL", "Postgresql"],
+    skills: ["MySQL", "PostgreSQL"],
     color: "green",
   },
   {
-    category: "Outils",
-    icon: <Frame size={24} />,
-    skills: ["WordPress", "VSCode", "Trello", "Photoshop CS5", "Canva", "Figma"],
+    category: "Conception & Architecture",
+    icon: <Workflow size={24} />,
+    skills: ["Méthodes Merise", "UML", "Architecture MVC"],
+    color: "orange",
+  },
+  {
+    category: "Gestion de version",
+    icon: <GitBranch size={24} />,
+    skills: ["Git", "GitHub"],
+    color: "red",
+  },
+  {
+    category: "Solutions Web & CMS",
+    icon: <Globe size={24} />, 
+    skills: ["WordPress", "SEO Technique", "Hébergement"],
     color: "grape",
   },
   {
-    category: "Pack Office",
-    icon: <FileBox size={24} />,
-    skills: ["Word", "Excel", "PowerPoint", "Publisher", "Outlook"],
-    color: "violet",
+    category: "Design & Création",
+    icon: <Palette size={24} />,
+    skills: ["Photoshop", "Canva"],
+    color: "cyan",
   },
   {
-    category: "Soft Skills",
+    category: "Soft Skills & Projets",
     icon: <User size={24} />,
-    skills: ["Adaptabilité", "Autonomie", "Travail en équipe", "Sens de l'organisation"],
+    skills: ["Adaptabilité", "Autonomie", "Trello (Agilité)", "Organisation"],
     color: "pink",
   },
 ];
@@ -227,6 +258,14 @@ export default function Home() {
       </AspectRatio>
       <Text className={style.date}>{article.date}</Text>
       <Text className={style.title}>{article.title}</Text>
+
+      <Flex gap={8} wrap="wrap" mt="sm">
+        {article.technologies.map((tech, index) => (
+          <Badge key={index} variant="light">
+            {tech}
+          </Badge>
+        ))}
+      </Flex>
     </Card>
   ));
 
@@ -243,6 +282,14 @@ export default function Home() {
       </AspectRatio>
       <Text className={style.date}>{article.date}</Text>
       <Text className={style.title}>{article.title}</Text>
+
+      <Flex gap={8} wrap="wrap" mt="sm">
+        {article.technologies.map((tech, index) => (
+          <Badge key={index} variant="light">
+            {tech}
+          </Badge>
+        ))}
+      </Flex>
 
     </Card>
   ));
@@ -448,7 +495,7 @@ Spécialisé dans le développement de logiciels web, la création de sites web 
                 </Tabs.Tab>
                 <Tabs.Tab value="2" ref={setControlRef('2')} className={projets.tab}>
                   <Flex align="center">
-                    <Code size={18} style={{ marginRight: 8 }}/>LOGICIELS
+                    <Code size={18} style={{ marginRight: 8 }}/>APP WEB
                   </Flex>
                 </Tabs.Tab>
 

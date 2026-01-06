@@ -7,6 +7,7 @@ import { theme } from "../theme";
 import Navbar from "@components/Navbar";
 import Footer from "@components/Footer";
 import { Notifications } from '@mantine/notifications';
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: "NATAHINA Rochaya - Développeur Web",
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <MantineProvider theme={theme} defaultColorScheme="auto">
           <Navbar />
           <Notifications />
+          <Analytics/>
           {children}
           <Footer />
         </MantineProvider>
