@@ -60,15 +60,16 @@ const logdata = [
     date: "05 Janvier 2026",
     url: "https://amiky.vercel.app/",
     technologies: ["Next.js", "React", "Mantine UI", "Framer Motion"],
-    description: `AMIKY est une plateforme de messagerie moderne qui rapproche les gens, en toute sécurité: `,
+    description: `AMIKY est une application de messagerie instantanée conçue pour offrir une expérience de communication fluide, sécurisée et esthétique. `,
     features: [
-      "Gestion complète des stocks en temps réel",
-      "Suivi des ventes, dépenses et mouvements de produits",
-      "Tableau de bord interactif pour visualiser les performances",
-      "Analyse des produits les plus vendus et des marges réalisées",
-      "Rapports détaillés pour orienter les décisions commerciales",
-      "Système sécurisé et accessible en ligne, utilisable depuis n’importe où",
-      "Interface intuitive adaptée aux responsables comme au personnel",
+      "Messagerie instantanée en temps réel",
+      "Interface utilisateur élégante et réactive avec Mantine UI",
+      "Animations fluides et transitions immersives avec Framer Motion",
+      "Système d'authentification sécurisé",
+      "Gestion des profils utilisateurs et statuts de présence",
+      "Notifications en temps réel pour ne manquer aucun message",
+      "Optimisation pour une utilisation sur mobile et desktop (PWA)",
+      "Architecture Cloud performante via Next.js et Vercel",
     ],
 
   },
@@ -314,7 +315,8 @@ export default function Home() {
           </Text>
         }
         size="lg"
-        yOffset="10vh"
+        yOffset="15vh"
+        zIndex={1000000}
         xOffset={0}
         transitionProps={{ transition: 'fade', duration: 200 }}
       >

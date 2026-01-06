@@ -14,12 +14,6 @@ export default function Navbar() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
   const pathname = usePathname();
-  // const handleScroll = (e, href) => {
-  //   if (href.startsWith("#")) {
-  //     e.preventDefault();
-  //     smoothScrollTo(href, 600);
-  //   }
-  // };
 
   const handleScroll = (
     e: React.MouseEvent<HTMLAnchorElement>,
